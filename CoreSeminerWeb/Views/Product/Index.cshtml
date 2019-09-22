@@ -1,0 +1,93 @@
+﻿@model PagingModel
+
+@{
+    ViewData["Title"] = "Index";
+    int currentPage = (int)ViewData["id"];
+}
+
+@Html.BoldText("Urunler")
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().UnitsInStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().UnitsOnOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().ReorderLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.prodList.First().Discontinued)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.prodList)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsInStock)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReorderLevel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Discontinued)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.ProductId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ProductId }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductId })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<paging for-pagecount="Model.PageCount" for-pagenumber="currentPage"></paging>
+@*Asagida paging icin yazdigimiz kodlari yukaridaki tag-helper yapisina aktardik*@
+@*@for (int index = 0; index < Model.PageCount; index++)
+{
+    if (currentPage == index)
+    {
+        <a href="/Product/Index/@index" class="btn btn-success">@(index + 1)</a>
+    }
+    else
+    {
+        <a href="/Product/Index/@index" class="btn btn-primary">@(index + 1)</a>
+    }
+}*@
+
